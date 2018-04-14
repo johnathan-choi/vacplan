@@ -1,6 +1,5 @@
 // public/core.js
 
-
 function getDateTime(date, mode){ //turns dates legible
     var month = date.getMonth()+1;
         if (month - 10 < 0){
@@ -21,13 +20,15 @@ function getDateTime(date, mode){ //turns dates legible
     if (mode == "date"){ // YYYY/MM/DD
         return date.getFullYear() + "/" + month + "/" + day;
     }
+    else if (mode == "date-"){ // YYYY-MM-DD
+        return date.getFullYear() + "-" + month + "-" + day;
+    }
     else if (mode == "time"){ // HH:MM
         return hours + ":" + minutes;
     }
     else{ // YYYY/MM/DD HH:MM
         return date.getFullYear() + "/" + month + "/" + day + " " + hours + ":" + minutes;
     }
-    
 }
 
 var app = angular.module('vacplan', ['ngFileUpload']);

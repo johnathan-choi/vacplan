@@ -9,10 +9,7 @@
   },
   "author": "Johnathan Choi",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/johnathan-choi/vacplan/issues"
-  },
-  "homepage": "https://github.com/johnathan-choi/vacplan#readme",
+  "homepage": "https://github.com/johnathan-choi/vacplan",
   "dependencies": {
     "async": "^2.6.0",
     "body-parser": "^1.18.2",
