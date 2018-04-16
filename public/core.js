@@ -31,9 +31,28 @@ function getDateTime(date, mode){ //turns dates legible
     }
 }
 
+const monthName = [
+    "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"
+]
+
 var app = angular.module('vacplan', ['ngFileUpload']);
 
 
 app.controller('indexPage', ['$scope', 'Upload', '$http', function($scope, Upload, $http){
     $scope.currTime = getDateTime(new Date());
+    $scope.refreshCal = function(){
+        $scope.getCal = monthName;
+    };
+    
+    /*
+        Getter function to retrieve all calendar dates
+    */
+    // $http.get('/api/calendar').then(function(response){
+    //     angular.forEach(response.data, function(value, key){
+    //         //hang on for now
+    //     })
+    // });
+    
+    $scope.getCal = monthName;
+
 }]);

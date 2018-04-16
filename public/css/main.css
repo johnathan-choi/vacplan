@@ -27,14 +27,37 @@ body{
     border-style: solid;
     border-width: 10px 5px;
     border-color: transparent;
-    padding: 0% 15%;
+    padding: 0% 10%;
     font-family: Roboto;
+}
+
+p{
+    margin: 0px;
 }
 
 div.body{
     background-color: #D8D8D8;
+    margin: 5px 0px 5px 0px;
     padding: 10px;
     border-radius: 10px;
+}
+
+.row{
+    margin: 0px 5px 0px 5px;
+}
+
+.row.heading{
+    font-size:  1.3em;
+    border-style: solid;
+    border-width: 0px 0px 2px 0px;
+    border-color: #1E88E5;
+    padding: 0px;
+}
+
+table.month{
+    display:    inline-table;
+    margin:     5px;
+    width:      32%;
 }
 
 /* Logo */
@@ -68,10 +91,27 @@ div.body{
     border-color: #92B2CA;
 }
 
+button.refreshCal{
+    font-size:          0.7em;
+    margin:             2px;
+    border-radius:      10px;
+    border-width:       1px;
+    border-color:       #1E88E5;
+    background-color:   #1E88E5;
+    color:              #ffffff;
+    transition-duration:0.2s;
+    cursor:             pointer;
+    position:           absolute;
+}
+.refreshCal:hover{
+    background-color:   #16568D;
+}
+
 /* Label */
 label{
     padding: 5px 0px 0px 0px;
     margin: 0px;
+    cursor: pointer;
 }
 
 /* Footer */

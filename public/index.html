@@ -25,9 +25,41 @@
         <div class="logo"><a href="index.html">Vacation Planner</a></div>
 
         <div class="body">
-            <p>Welcome {{userName}}. Current time is: {{currTime}}</p>
+            <p>
+                Welcome {{userName}} <br>
+                Current time is: {{currTime}}
+            </p>
 
             <p>{{phaseDesc}}</p>
+        </div>
+
+        <div class="body">
+            <div class="row heading">
+                <div class="col-8">
+                    <p align="center">2019 Calendar
+                    <button class="refreshCal" ng-click="refreshCal()">Refresh</button>
+                    </p>
+                </div>
+                <div class="col-4"><p align="center">Action</p></div>
+            </div>
+            <div class="row">
+                <div class="col-8" align="center">
+                    <table border="1" class="month" ng-repeat="cal in getCal">
+                        <tr>
+                            <th colspan="7"><p align="center">{{cal}}</p></th>
+                        </tr>
+                        <tr>
+                            <th><p align="center">S</p></th>
+                            <th><p align="center">M</p></th>
+                            <th><p align="center">T</p></th>
+                            <th><p align="center">W</p></th>
+                            <th><p align="center">T</p></th>
+                            <th><p align="center">F</p></th>
+                            <th><p align="center">S</p></th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
         </div>
         
     </body>
