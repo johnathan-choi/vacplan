@@ -4,7 +4,8 @@ const PORT = process.env.PORT || 8080;
 
 var express  = require('express');
 var app      = express();                   
-var morgan = require('morgan');             
+var morgan = require('morgan');     
+var mongoose = require('mongoose');                     // mongoose for mongodb        
 var bodyParser = require('body-parser');    
 var methodOverride = require('method-override'); 
 var xlsx = require('xlsx');
@@ -13,6 +14,15 @@ var fs = require('fs-extra');
 var request = require('request');
 var rp = require('request-promise');
 var async = require('async');
+
+//load credential files. All must be found
+try{
+    var vacplandb = require('./private/credentials/vacplandb.json');
+}
+catch(e){
+    console.error("Unable to find one or more credential files. Exiting.");
+    process.exit(1);
+}
 
 app.use(express.static(__dirname + '/public'));                 
 app.use(morgan('dev'));                                         
@@ -52,6 +62,9 @@ function getDateTime(date, mode){ //turns dates legible
         return date.getFullYear() + "/" + month + "/" + day + " " + hours + ":" + minutes;
     }
 }
+
+// Connect to MongoDB via Mongoose
+var dbconnect = mongoose.connect('mongodb://@ds247619.mlab.com:47619/vacplan', vacplandb);
 
 app.listen(PORT);
 console.log("App listening on port "+ PORT);
