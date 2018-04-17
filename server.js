@@ -86,6 +86,8 @@ var calSchema = new mongoose.Schema({
     monthName   : String,
     year        : Number,
     isHoliday   : Boolean,
+    deptNum     : Number,
+    deptName    : String,
     sLimit      : Number,
     sFilled     : Number,
     mLimit      : Number,
@@ -93,7 +95,7 @@ var calSchema = new mongoose.Schema({
 });
 var Calendar = mongoose.model('calendar', calSchema, 'calendars');
 
-function createCal(iYear){ // create one document per day in iYear for calendar collection
+function createCal(iYear, iDept, sDeptName){ // create one document per day in iYear for calendar collection
     //names of the week; months of the year
     var sDay = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];    
     var sMonth = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -118,6 +120,8 @@ function createCal(iYear){ // create one document per day in iYear for calendar 
             monthName : sMonth[new Date(d).getMonth()],
             year      : new Date(d).getFullYear(),
             isHoliday : bHoliday,
+            deptNum   : iDept,
+            deptName  : sDeptName,
             sLimit    : 0, //separate function to update limits
             sFilled   : 0,
             mLimit    : 0,
@@ -125,7 +129,7 @@ function createCal(iYear){ // create one document per day in iYear for calendar 
         });
     }
 }
-//createCal(2019); //blows up the collection. Use only when needed
+//createCal(2019, 6958, "Claims Call Centre"); //blows up the collection. Use only when needed
 
 app.listen(PORT);
 console.log("App listening on port "+ PORT);
