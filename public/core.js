@@ -33,7 +33,7 @@ function getDateTime(date, mode){ //turns dates legible
 
 const monthName = [
     "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"
-]
+];
 
 var app = angular.module('vacplan', ['ngFileUpload']);
 

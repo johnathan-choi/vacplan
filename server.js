@@ -64,7 +64,68 @@ function getDateTime(date, mode){ //turns dates legible
 }
 
 // Connect to MongoDB via Mongoose
-var dbconnect = mongoose.connect('mongodb://@ds247619.mlab.com:47619/vacplan', vacplandb);
+var dbconnect = mongoose.connect('mongodb://@ds247619.mlab.com:47619/vacplan', vacplandb).then(
+    function(){ //success
+        console.log("Connected to database.");
+    }, 
+    function(error){ //failure
+        console.log("Cannot connect to database. Check credentials.");
+        process.exit(1);
+    }
+);
+
+// define & declare table schemae
+var calSchema = new mongoose.Schema({
+    date        : { //date in UNIX, unique index
+        type        : Number, 
+        index       : true,
+        unique      : true },
+    day         : Number,
+    dayName     : String,
+    month       : Number,
+    monthName   : String,
+    year        : Number,
+    isHoliday   : Boolean,
+    sLimit      : Number,
+    sFilled     : Number,
+    mLimit      : Number,
+    mFilled     : Number
+});
+var Calendar = mongoose.model('calendar', calSchema, 'calendars');
+
+function createCal(iYear){ // create one document per day in iYear for calendar collection
+    //names of the week; months of the year
+    var sDay = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];    
+    var sMonth = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    
+    //Jan 1 and Dec 31, including daylight savings (GMT-8)
+    var dStart = new Date(iYear+"-01-01").getTime()+(8*60*60*1000);
+    var dEnd = new Date(iYear +"-12-31").getTime()+(8*60*60*1000);
+
+    for (var d=dStart; d<=dEnd; d=d+(24*60*60*1000)){
+        if(new Date(d).getDay()==0||new Date(d).getDay()==6){
+            var bHoliday = true;
+        }
+        else{
+            var bHoliday = false;
+        }
+
+        Calendar.create({
+            date      : new Date(d),
+            day       : new Date(d).getDate(),
+            dayName   : sDay[new Date(d).getDay()],
+            month     : new Date(d).getMonth()+1,
+            monthName : sMonth[new Date(d).getMonth()],
+            year      : new Date(d).getFullYear(),
+            isHoliday : bHoliday,
+            sLimit    : 0, //separate function to update limits
+            sFilled   : 0,
+            mLimit    : 0,
+            mFilled   : 0
+        });
+    }
+}
+//createCal(2019); //blows up the collection. Use only when needed
 
 app.listen(PORT);
 console.log("App listening on port "+ PORT);
