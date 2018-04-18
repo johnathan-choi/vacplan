@@ -35,15 +35,18 @@
 
         <div class="body">
             <div class="row heading">
-                <div class="col-8">
+                <div class="col-9">
                     <p align="center">2019 Calendar
                     <button class="refreshCal" ng-click="refreshCal()">Refresh</button>
                     </p>
                 </div>
-                <div class="col-4"><p align="center">Action</p></div>
+                <div class="col-3">
+                    <p align="center">User Info</p>
+                </div>
             </div>
+
             <div class="row">
-                <div class="col-8" align="center">
+                <div class="col-9" align="center">
                     <table border="1" class="month" ng-repeat="cal in getCal">
                         <tr>
                             <th colspan="7"><p align="center">{{cal}}</p></th>
@@ -59,7 +62,26 @@
                         </tr>
                     </table>
                 </div>
+                <div class="col-3">
+                    <p>Name: {{userName}}</p>
+                    <p>Email: {{userEmail}}</p>
+                    
+                    <div class="row sub">
+                        <div class="col sub">
+                            <p>Seniority Hours: {{senHours}}</p>
+                            <p>Seniority Order: {{senOrder}}</p>
+                        </div>
+                        <div class="col sub">
+                            <p>Entitled Days: {{allowedDays}}</p>
+                            <p>Remaining Days: {{remDays}}</p>
+                        </div>
+                    </div>
+                    <p align="center"><button>Submit Round 1</button></p>
+                    <p align="center"><button>Submit Round 2</button></p>
+                    <p align="center"><button>Submit Round 3</button></p>
+                </div>
             </div>
+
         </div>
         
     </body>
