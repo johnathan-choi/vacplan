@@ -116,20 +116,31 @@ function createCal(iYear, iDept, sDeptName){ // create one document per day in i
             date      : new Date(d),
             day       : new Date(d).getDate(),
             dayName   : sDay[new Date(d).getDay()],
-            month     : new Date(d).getMonth()+1,
+            month     : new Date(d).getMonth(),
             monthName : sMonth[new Date(d).getMonth()],
             year      : new Date(d).getFullYear(),
             isHoliday : bHoliday,
             deptNum   : iDept,
             deptName  : sDeptName,
-            sLimit    : 0, //separate function to update limits
+            sLimit    : 0, //separate function to update limits?
             sFilled   : 0,
             mLimit    : 0,
             mFilled   : 0
         });
     }
 }
-//createCal(2019, 6958, "Claims Call Centre"); //blows up the collection. Use only when needed
+//createCal(2019, 6958, "Claims Call Centre"); //makes a whole calendar. Use only when needed
+
+app.get('/api/calendar', function(req, res){
+    Calendar.find({
+        deptNum     : "6958" //later use a variable
+        }).sort({
+            date    : "asc"
+        }).exec(function(err, result){
+            if (err) res.end(err);
+            res.json(result);
+        });
+});
 
 app.listen(PORT);
 console.log("App listening on port "+ PORT);

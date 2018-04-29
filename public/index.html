@@ -47,7 +47,7 @@
 
             <div class="row">
                 <div class="col-9" align="center">
-                    <table border="1" class="month" ng-repeat="cal in getCal">
+                    <!-- <table border="1" class="month" ng-repeat="cal in getCal">
                         <tr>
                             <th colspan="7"><p align="center">{{cal}}</p></th>
                         </tr>
@@ -60,7 +60,10 @@
                             <th><p align="center">F</p></th>
                             <th><p align="center">S</p></th>
                         </tr>
-                    </table>
+                    </table> -->
+                    <p ng-repeat="calendar in result">
+                        {{calendar.date}} {{calendar.dayName}}
+                    </p>
                 </div>
                 <div class="col-3">
                     <p>Name: {{userName}}</p>
